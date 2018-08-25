@@ -6,7 +6,7 @@ stty stop ""
 precmd-color() {
     local -a colors
     (cat ~/.config/zsh/colors 2> /dev/null; echo '0 white white white' ) |
-        ggrep -Em1 "^($(id -u)|$USER|$(hostname)) " | sed 's/^[^ ]* //'
+        grep -Em1 "^($(id -u)|$(hostname)) " | sed 's/^[^ ]* //'
 }
 precmdcolorcache="$(precmd-color)"
 precmd-color() { echo "${precmdcolorcache}" }
@@ -14,7 +14,7 @@ precmd-color() { echo "${precmdcolorcache}" }
 precmd-realm() {
     local merightnow realm depth
     merightnow="$(pwd | sed "s:$HOME::")"
-    realm="$(echo $merightnow | ggrep -Eo '^/[^/]+($|/[^/]+)' | cut -b2-)"
+    realm="$(echo $merightnow | grep -Eo '^/[^/]+($|/[^/]+)' | cut -b2-)"
     depth="$(tr -cd '/' <<< "$merightnow" | wc -c)"
 
     if (( $depth < 2 )); then
@@ -32,7 +32,7 @@ precmd-realm() {
 precmd() {
     local fst snd thd git ruby
     git=""
-    ruby="$(rbenv version 2> /dev/null | ggrep -Po '^\d\S+')"
+    ruby="$(rbenv version 2> /dev/null | grep -o '^\d\S+')"
 
     [ "$(id -u)" = "0" ] && sep=')' || sep='|'
     read fst snd thd <<< "$(precmd-color)"
