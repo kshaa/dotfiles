@@ -61,6 +61,7 @@ export GITDIR="$HOME/.git"
 
 alias phpd='php -dxdebug.remote_enable=1 -dxdebug.remote_mode=req -dxdebug.remote_port=9001 -dxdebug.remote_host=127.0.0.1'
 alias ls='ls -G'
+alias la-'ls -la'
 alias l='ls'
 alias p='ping google.lv' # tired of writing this over and over again.
 
